@@ -2,6 +2,7 @@
 mod args;
 mod day1;
 mod day2;
+mod day3;
 mod fetcher;
 
 use aoc2024::Day;
@@ -22,6 +23,7 @@ fn get_day(day: u32, data: String) -> Box<dyn Day> {
     match day {
         1 => Box::new(day1::Day1::new(data)),
         2 => Box::new(day2::Day2::new(data)),
+        3 => Box::new(day3::Day3::new(data)),
         _ => panic!(),
     }
 }
