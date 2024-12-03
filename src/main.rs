@@ -1,11 +1,13 @@
+#![feature(array_windows)]
 mod args;
 mod day1;
+mod day2;
 mod fetcher;
 
 use aoc2024::Day;
 use args::Args;
 use clap::Parser;
-use day1::Day1;
+use std::time::Instant;
 
 fn run(runner: Box<dyn Day>, challenge: u8) {
     let res = match challenge {
@@ -18,7 +20,8 @@ fn run(runner: Box<dyn Day>, challenge: u8) {
 
 fn get_day(day: u32, data: String) -> Box<dyn Day> {
     match day {
-        1 => Box::new(Day1::new(data)),
+        1 => Box::new(day1::Day1::new(data)),
+        2 => Box::new(day2::Day2::new(data)),
         _ => panic!(),
     }
 }
@@ -28,5 +31,9 @@ fn main() {
 
     let data = fetcher::get(args.day);
 
+    let now = Instant::now();
+
     run(get_day(args.day, data), args.challenge);
+
+    println!("Time taken = {}", now.elapsed().as_secs_f64());
 }
